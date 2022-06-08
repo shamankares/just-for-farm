@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=5 format=2]
+
+[ext_resource path="res://scripts/items/item.gd" type="Script" id=1]
+[ext_resource path="res://proto/tanaman.obj" type="ArrayMesh" id=2]
+[ext_resource path="res://scripts/item_methods.gd" type="Script" id=3]
+[ext_resource path="res://proto/proto_icon.png" type="Texture" id=4]
+
+[resource]
+script = ExtResource( 1 )
+item_name = "Proto"
+item_type = 2
+item_mesh = ExtResource( 2 )
+item_icon = ExtResource( 4 )
+script_methods = ExtResource( 3 )
+stackable = true
+max_stack = 99
+sell_price = 20
+buy_price = 10
