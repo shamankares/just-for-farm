@@ -12,7 +12,6 @@ func _init():
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	
 	$Player/Pivot/Camera/RayCast.connect("ground_clicked", $World/Tanah, "get_item")
 
 func _input(event):

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=5 format=2]
+
+[ext_resource path="res://scripts/item_methods.gd" type="Script" id=1]
+[ext_resource path="res://scripts/items/item.gd" type="Script" id=2]
+[ext_resource path="res://proto/benih.obj" type="ArrayMesh" id=3]
+[ext_resource path="res://proto/proto_icon.png" type="Texture" id=4]
+
+[resource]
+script = ExtResource( 2 )
+item_name = "Benih"
+item_type = 1
+item_mesh = ExtResource( 3 )
+item_icon = ExtResource( 4 )
+script_methods = ExtResource( 1 )
+stackable = true
+max_stack = 10
+sell_price = 60
+buy_price = 8

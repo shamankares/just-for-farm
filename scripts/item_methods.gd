@@ -10,6 +10,9 @@ func use_item(item):
 	pass
 
 func equip(item):
+	#
+	# Switch-case item enum
+	#
 	pass
 
 func throw(item):

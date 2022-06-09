@@ -16,12 +16,21 @@ onready var animation = $AnimationPlayer
 
 func _ready():
 	$Pivot/Camera/RayCast.add_exception(self)
+	var dummy = ItemResLoader.get_item("Proto")	###debug
+	inventory.add_to_inventory(dummy, 1)	###debug
+	inventory.add_to_inventory(dummy, 1)	###debug
+	inventory.throw_item()	###debug
+	inventory.throw_item()	###debug
 
 func _input(event):
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		mouse_delta = event.relative
 	if Input.is_action_just_pressed("interact"):
 		use_item()
+	if Input.is_action_just_pressed("focus_foward"):
+		inventory.swap_equipped_item(1)
+	if Input.is_action_just_pressed("focus_backward"):
+		inventory.swap_equipped_item(-1)
 
 func _process(delta):
 	#
@@ -62,7 +71,10 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity, Vector3.UP)
 
 func use_item():
-	var equip_idx = inventory.equipped_pointer
-	if equip_idx != null:
-		var item = inventory.item_list[equip_idx]
-		item.use()
+	var item = inventory.get_equipped_item()
+	#
+	# Cek jenis item
+	#
+#	if equip_idx != null:
+#		var item = inventory.item_list[equip_idx]
+#		item.use()
