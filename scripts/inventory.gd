@@ -1,7 +1,7 @@
 class_name Inventory
 extends Node
 
-signal item_equipped(item)
+signal item_equipped(item, idx)
 signal inventory_changed(inv)
 signal msg_inv_error(msg)
 
@@ -17,7 +17,7 @@ func _init():
 	
 	for i in range(slot):
 		item_list.append(item_details)
-	emit_signal("inventory_changed", self)
+#	emit_signal("inventory_changed", self)
 
 func _ready():
 	print("inventory.gd: ", item_list)	###debug
@@ -30,27 +30,35 @@ func get_equipped_item():
 		return null
 
 func add_to_inventory(item, quantity):
+	var stack_pointer = _get_free_slot()
+	if stack_pointer == null:
+		emit_signal("msg_inv_error", "INVENTORY_FULL")
+#		return false
+	else:
+		item_list[stack_pointer] = {
+			"item_res" : item,
+			"stack" : quantity
+		}
+#	return true
+
+func add_existed_item(item, quantity):
 	if quantity <= 0:
 		emit_signal("msg_inv_error", "INVALID_QUANTITY")
 		return false
 	
 	var idx = _get_item_idx(item)
 	if idx != null:
-		item_list[idx]["stack"] += quantity
+		var total_item_added = item.max_stack - item_list[idx]["stack"]
+		var quantity_left = quantity - total_item_added
+		item_list[idx]["stack"] += total_item_added
+		if quantity_left > 0:
+			add_to_inventory(item, quantity_left)
 	else:
-		var stack_pointer = _get_free_slot()
-		if stack_pointer == null:
-			emit_signal("msg_inv_error", "INVENTORY_FULL")
-			return false
-		else:
-			item_list[stack_pointer] = {
-				"item_res" : item,
-				"stack" : quantity
-			}
+		add_to_inventory(item, quantity)
 	
 	emit_signal("inventory_changed", self)
 	print("inventory.gd: ", item_list)	###debug
-	return true
+	print(item_list[0]["item_res"].item_name)	###debug
 
 func remove_item():
 	item_list[_equipped_pointer] = {
@@ -72,6 +80,7 @@ func throw_item():
 
 func swap_equipped_item(direction):
 	if _equipped_pointer == null:
+		_equipped_pointer = 0
 		print("Equipped pointer:", _equipped_pointer)	###debug
 		return
 	if direction < 0:
@@ -89,7 +98,7 @@ func swap_equipped_item(direction):
 
 func equip_item(idx):
 	var item = item_list[idx]["item_res"]
-	emit_signal("item_equipped", item)
+	emit_signal("item_equipped", item, idx)
 	pass
 
 func unequip_item():

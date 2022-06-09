@@ -16,11 +16,11 @@ onready var animation = $AnimationPlayer
 
 func _ready():
 	$Pivot/Camera/RayCast.add_exception(self)
-	var dummy = ItemResLoader.get_item("Proto")	###debug
-	inventory.add_to_inventory(dummy, 1)	###debug
-	inventory.add_to_inventory(dummy, 1)	###debug
-	inventory.throw_item()	###debug
-	inventory.throw_item()	###debug
+	inventory.connect("item_equipped", self, "_on_equipped_item")
+	
+#	var dummy = ItemResLoader.get_item("Proto")	###debug
+#	inventory.add_to_inventory(dummy, 1)	###debug
+#	inventory.add_to_inventory(dummy, 1)	###debug
 
 func _input(event):
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
@@ -78,3 +78,7 @@ func use_item():
 #	if equip_idx != null:
 #		var item = inventory.item_list[equip_idx]
 #		item.use()
+
+func _on_equipped_item(item, _idx):
+	
+	pass

@@ -39,7 +39,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Just For Farm"
-run/main_scene="res://scenes/MainScene.tscn"
+run/main_scene="res://scenes/Gameplay.tscn"
 config/icon="res://icon.png"
 
 [autoload]
