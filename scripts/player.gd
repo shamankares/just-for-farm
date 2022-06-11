@@ -10,9 +10,12 @@ var look_sensivity : float = 0.8
 var mouse_delta : Vector2 = Vector2()
 var velocity : Vector3 = Vector3()
 
+var equipped_item
+
 onready var camera = $Pivot/Camera
 onready var inventory = $Inventory
 onready var animation = $AnimationPlayer
+onready var item_pivot = $Pivot/Camera/ItemPosition
 
 func _ready():
 	$Pivot/Camera/RayCast.add_exception(self)
@@ -80,5 +83,10 @@ func use_item():
 #		item.use()
 
 func _on_equipped_item(item, _idx):
-	
-	pass
+	if item:
+		equipped_item = MeshInstance.new()
+		equipped_item.set_mesh(item.item_mesh)
+		item_pivot.add_child(equipped_item)
+	else:
+		if is_instance_valid(equipped_item):
+			equipped_item.queue_free()

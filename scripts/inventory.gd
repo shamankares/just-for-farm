@@ -99,12 +99,11 @@ func swap_equipped_item(direction):
 func equip_item(idx):
 	var item = item_list[idx]["item_res"]
 	emit_signal("item_equipped", item, idx)
-	pass
 
 func unequip_item():
 	_equipped_pointer = null
 	var item = null
-	emit_signal("item_equipped", item)
+	emit_signal("item_equipped", item, null)
 	print("Equipped: ", _equipped_pointer)	###debug
 
 func _get_free_slot():
