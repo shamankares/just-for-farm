@@ -1,6 +1,6 @@
 extends Spatial
 
-
+var plants : Dictionary
 
 func _init():
 	pass
@@ -10,7 +10,9 @@ func _ready():
 	pass
 
 func spawn_plant(plant):
-	pass
+	var plant_ground = Node.new()
+	
+	
 
 func remove_plant(plant):
 	pass
