@@ -1,9 +1,0 @@
-[gd_scene format=2]
-
-[node name="Plant" type="Node"]
-
-[node name="ToPhase1" type="Timer" parent="."]
-one_shot = true
-
-[node name="ToPhase2" type="Timer" parent="."]
-one_shot = true

@@ -17,27 +17,21 @@ _global_script_classes=[ {
 "base": "Node",
 "class": "Inventory",
 "language": "GDScript",
-"path": "res://scripts/inventory.gd"
-}, {
-"base": "RigidBody",
-"class": "Item",
-"language": "GDScript",
-"path": "res://scenes/Item_tester.gd"
+"path": "res://scenes/gameplay/inventory.gd"
 }, {
 "base": "Resource",
 "class": "ItemResource",
 "language": "GDScript",
-"path": "res://scripts/items/item.gd"
+"path": "res://scenes/misc/item_proto.gd"
 }, {
 "base": "Resource",
 "class": "SaveData",
 "language": "GDScript",
-"path": "res://scripts/save.gd"
+"path": "res://scenes/misc/save.gd"
 } ]
 _global_script_class_icons={
 "GitAPI": "",
 "Inventory": "",
-"Item": "",
 "ItemResource": "",
 "SaveData": ""
 }
@@ -45,12 +39,12 @@ _global_script_class_icons={
 [application]
 
 config/name="Just For Farm"
-run/main_scene="res://scenes/Gameplay.tscn"
+run/main_scene="res://scenes/gameplay/Gameplay.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
-ItemResLoader="*res://scripts/item_res_loader.gd"
+ItemResLoader="*res://scenes/misc/item_res_loader.gd"
 
 [editor_plugins]
 
@@ -103,9 +97,17 @@ focus_backward={
  ]
 }
 
+[layer_names]
+
+3d_physics/layer_1="world"
+3d_physics/layer_2="seed"
+3d_physics/layer_3="bin"
+3d_physics/layer_4="harvest"
+
 [physics]
 
 common/enable_pause_aware_picking=true
+3d/default_gravity=12.0
 
 [rendering]
 
