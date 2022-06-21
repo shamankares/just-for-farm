@@ -9,7 +9,7 @@ func _init():
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	$Player/Pivot/Camera/RayCast.connect("ground_clicked", $World/Tanah, "get_item")
+	#$Player/Pivot/Camera/RayCast.connect("ground_clicked", $World/Tanah, "get_item")
 	$Player.connect("ground_clicked", $World/Tanah, "take_act_grid", [], CONNECT_DEFERRED)
 	$Player/Inventory.connect("inventory_changed", $GameplayUI, "_on_inventory_changed", [], CONNECT_DEFERRED)
 	

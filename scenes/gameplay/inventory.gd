@@ -26,6 +26,13 @@ func _ready():
 	print("inventory.gd: ", item_list)	###debug
 	print(item_list.size())	###debug
 
+func check_free_slot():
+	for item in item_list:
+		if item["item_res"] == null:
+			return true
+	
+	return false
+
 func get_equipped_item():
 	if _equipped_pointer != null and _equipped_pointer < item_list.size():
 		return item_list[_equipped_pointer]["item_res"]
@@ -53,8 +60,11 @@ func add_existed_item(item_name, quantity):
 		return false
 	
 	var item = ItemResLoader.get_item(item_name)
-	var idx = _get_item_idx(item_name)
+	var idx = _get_item_free_stack_id(item_name)
 	if idx != null:
+		# TODO: BUG Stack item ketika memasukkan 1 item pada
+		#		item yang sudah ada.
+		#		Dari 1 ke 99
 		var total_item_added = MAX_STACK - item_list[idx]["stack"]
 		var quantity_left = quantity - total_item_added
 		item_list[idx]["stack"] += total_item_added
@@ -69,7 +79,9 @@ func add_existed_item(item_name, quantity):
 
 func remove_item():
 	item_list[_equipped_pointer] = {
+		"item_name": null,
 		"item_res" : null,
+		"item_icon" : null,
 		"stack" : 0
 	}
 	unequip_item()
@@ -81,7 +93,7 @@ func throw_item():
 		item_list[_equipped_pointer]["stack"] -= 1
 		if item_list[_equipped_pointer]["stack"] == 0:
 			remove_item()
-		emit_signal("inventory_changed", self)
+		call_deferred("emit_signal", "inventory_changed", self)
 	#print("inventory.gd: ", item_list)	###debug
 
 func swap_equipped_item(direction):
@@ -120,9 +132,9 @@ func _get_free_slot():
 	
 	return null
 
-func _get_item_idx(item_name):
+func _get_item_free_stack_id(item_name):
 	for i in item_list:
-		if i["item_name"] == item_name:
+		if i["item_name"] == item_name and i["stack"] < MAX_STACK:
 			return item_list.find(i)
 	
 	return null

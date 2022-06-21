@@ -57,14 +57,34 @@ var countdown_tanaman = {
 func _ready():
 	pass # Replace with function body.
 
-func get_item(global_position):
+func harvest(global_position):
 	var loc_pos = world_to_map(global_position)
-	var idx_tanah = get_cell_item(loc_pos.x, loc_pos.y, loc_pos.z)
+	var found_plant
+	
+	for tanaman in plants:
+		if tanaman["plant_id"].plant_position == loc_pos and tanaman["plant_id"].plant_phase == 2:
+			found_plant = tanaman
+	
+	if found_plant:
+		var plant_name = found_plant["plant_name"]
+		
+		plant_name = plant_name.capitalize()
+		set_cell_item(loc_pos.x, loc_pos.y, loc_pos.z, daftar_tanaman["tanah"])
+		found_plant["plant_id"].queue_free()
+		plants.erase(found_plant)
+		return plant_name
+	else:
+		return null
 
-	if idx_tanah == 1:
-		set_cell_item(loc_pos.x, loc_pos.y, loc_pos.z, 0)
-	elif idx_tanah == 0:
-		set_cell_item(loc_pos.x, loc_pos.y, loc_pos.z, 1)
+func is_tanah(glo_pos):
+	var loc_pos = world_to_map(glo_pos)
+	var idx_tanah = get_cell_item(loc_pos.x, loc_pos.y, loc_pos.z)
+	
+	if idx_tanah == daftar_tanaman["tanah"]:
+		return true
+	else:
+		return false
+	pass
 
 func take_act_grid(item_name, glo_pos):
 	var loc_pos = world_to_map(glo_pos)
@@ -81,13 +101,13 @@ func take_act_grid(item_name, glo_pos):
 						tanaman["plant_id"].is_watered = true
 						if idx_tanah == daftar_tanaman["seed"][0]:
 							set_cell_item(loc_pos.x, loc_pos.y, loc_pos.z, daftar_tanaman["seed"][int(tanaman["plant_id"].is_watered)])
-							call_deferred("grow_plant", tanaman["plant_id"])
+							tanaman["plant_id"].call_deferred("grow")
+							#call_deferred("grow_plant", tanaman["plant_id"])
 						else:
 							var plant_name = tanaman["plant_id"].plant_name
 							set_cell_item(loc_pos.x, loc_pos.y, loc_pos.z, daftar_tanaman[plant_name][str(tanaman["plant_id"].plant_phase)][int(tanaman["plant_id"].is_watered)])
-							call_deferred("grow_plant", tanaman["plant_id"])
-				print("Watered")
-				pass
+							tanaman["plant_id"].call_deferred("grow")
+							#call_deferred("grow_plant", tanaman["plant_id"])
 		_:
 			set_cell_item(loc_pos.x, loc_pos.y, loc_pos.z, daftar_tanaman["seed"][0])
 			spawn_plant(item_name, loc_pos)
@@ -106,8 +126,8 @@ func spawn_plant(plant, loc):
 	add_child(new_plant, true)
 	new_plant.connect("plant_grew", self, "update_plant", [], CONNECT_DEFERRED)
 
-func grow_plant(plant_id):
-	plant_id.grow()
+#func grow_plant(plant_id):
+#	plant_id.grow()
 
 func update_plant(plant_id, location):
 	var plant_name = plant_id.plant_name
