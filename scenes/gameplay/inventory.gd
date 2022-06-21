@@ -65,6 +65,9 @@ func add_existed_item(item_name, quantity):
 		# TODO: BUG Stack item ketika memasukkan 1 item pada
 		#		item yang sudah ada.
 		#		Dari 1 ke 99
+		#while MAX_STACK > item_list[idx]["stack"]:
+			
+		
 		var total_item_added = MAX_STACK - item_list[idx]["stack"]
 		var quantity_left = quantity - total_item_added
 		item_list[idx]["stack"] += total_item_added
