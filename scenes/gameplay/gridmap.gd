@@ -106,6 +106,8 @@ func take_act_grid(item_name, glo_pos):
 		"Cangkul":
 			if idx_tanah == daftar_tanaman["rumput"]:
 				set_cell_item(loc_pos.x, loc_pos.y, loc_pos.z, daftar_tanaman["tanah"])
+			elif idx_tanah == daftar_tanaman["tanah"]:
+				set_cell_item(loc_pos.x, loc_pos.y, loc_pos.z, daftar_tanaman["rumput"])
 		"Penyiram":
 			if not idx_tanah in [daftar_tanaman["rumput"], daftar_tanaman["lapangan"]]:
 				for tanaman in get_children():

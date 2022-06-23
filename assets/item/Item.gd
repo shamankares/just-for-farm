@@ -1,6 +1,6 @@
 extends RigidBody
 
-signal item_sold(price)
+signal item_sold(item_name, price)
 
 enum ItemType { EQUIPMENT, SEED, HARVEST }
 
@@ -51,7 +51,7 @@ func get_seed_name():
 	return plant_name
 
 func sell_item():
-	emit_signal("item_sold", sell_price)
+	emit_signal("item_sold", item_name, sell_price)
 
 func get_name():
 	return item_name

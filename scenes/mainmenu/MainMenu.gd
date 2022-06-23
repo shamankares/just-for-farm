@@ -20,7 +20,7 @@ func _on_Credits_pressed():
 
 func _on_Exit_pressed():
 	get_tree().quit(0)
-
+				
 func _on_HowToPlay_pressed():
 	$Main.visible = false
 	$HowToPlay.visible = true
