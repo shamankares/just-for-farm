@@ -12,14 +12,26 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 2 )
 
-[node name="InventoryContainer" type="GridContainer" parent="."]
+[node name="Inventory" type="ColorRect" parent="."]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -336.0
-margin_top = -79.0
-margin_bottom = -49.0
+margin_left = -344.0
+margin_top = -65.0
+margin_right = 344.0
+margin_bottom = 2.0
+color = Color( 0.168627, 0.160784, 0.305882, 1 )
+
+[node name="InventoryContainer" type="GridContainer" parent="Inventory"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -337.0
+margin_top = -60.0
+margin_right = -1.0
+margin_bottom = -30.0
 rect_scale = Vector2( 2, 2 )
 theme = SubResource( 3 )
 columns = 10
@@ -27,20 +39,27 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="1" type="TextureRect" parent="InventoryContainer"]
+[node name="1" type="TextureRect" parent="Inventory/InventoryContainer"]
 margin_right = 30.0
 margin_bottom = 30.0
 rect_min_size = Vector2( 30, 30 )
 texture = ExtResource( 3 )
 expand = true
 
-[node name="Label" type="Label" parent="InventoryContainer/1"]
+[node name="Label" type="Label" parent="Inventory/InventoryContainer/1"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 text = "0
 "
 
-[node name="2" type="TextureRect" parent="InventoryContainer"]
+[node name="Focus" type="ReferenceRect" parent="Inventory/InventoryContainer/1"]
+margin_right = 30.0
+margin_bottom = 30.0
+border_color = Color( 0.760784, 0.858824, 0.87451, 1 )
+border_width = 2.0
+editor_only = false
+
+[node name="2" type="TextureRect" parent="Inventory/InventoryContainer"]
 margin_left = 34.0
 margin_right = 64.0
 margin_bottom = 30.0
@@ -48,13 +67,20 @@ rect_min_size = Vector2( 30, 30 )
 texture = ExtResource( 3 )
 expand = true
 
-[node name="Label" type="Label" parent="InventoryContainer/2"]
+[node name="Label" type="Label" parent="Inventory/InventoryContainer/2"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 text = "0
 "
 
-[node name="3" type="TextureRect" parent="InventoryContainer"]
+[node name="Focus" type="ReferenceRect" parent="Inventory/InventoryContainer/2"]
+margin_right = 30.0
+margin_bottom = 30.0
+border_color = Color( 0.760784, 0.858824, 0.87451, 1 )
+border_width = 2.0
+editor_only = false
+
+[node name="3" type="TextureRect" parent="Inventory/InventoryContainer"]
 margin_left = 68.0
 margin_right = 98.0
 margin_bottom = 30.0
@@ -62,13 +88,20 @@ rect_min_size = Vector2( 30, 30 )
 texture = ExtResource( 3 )
 expand = true
 
-[node name="Label" type="Label" parent="InventoryContainer/3"]
+[node name="Label" type="Label" parent="Inventory/InventoryContainer/3"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 text = "0
 "
 
-[node name="4" type="TextureRect" parent="InventoryContainer"]
+[node name="Focus" type="ReferenceRect" parent="Inventory/InventoryContainer/3"]
+margin_right = 30.0
+margin_bottom = 30.0
+border_color = Color( 0.760784, 0.858824, 0.87451, 1 )
+border_width = 2.0
+editor_only = false
+
+[node name="4" type="TextureRect" parent="Inventory/InventoryContainer"]
 margin_left = 102.0
 margin_right = 132.0
 margin_bottom = 30.0
@@ -76,13 +109,20 @@ rect_min_size = Vector2( 30, 30 )
 texture = ExtResource( 3 )
 expand = true
 
-[node name="Label" type="Label" parent="InventoryContainer/4"]
+[node name="Label" type="Label" parent="Inventory/InventoryContainer/4"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 text = "0
 "
 
-[node name="5" type="TextureRect" parent="InventoryContainer"]
+[node name="Focus" type="ReferenceRect" parent="Inventory/InventoryContainer/4"]
+margin_right = 30.0
+margin_bottom = 30.0
+border_color = Color( 0.760784, 0.858824, 0.87451, 1 )
+border_width = 2.0
+editor_only = false
+
+[node name="5" type="TextureRect" parent="Inventory/InventoryContainer"]
 margin_left = 136.0
 margin_right = 166.0
 margin_bottom = 30.0
@@ -90,13 +130,20 @@ rect_min_size = Vector2( 30, 30 )
 texture = ExtResource( 3 )
 expand = true
 
-[node name="Label" type="Label" parent="InventoryContainer/5"]
+[node name="Label" type="Label" parent="Inventory/InventoryContainer/5"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 text = "0
 "
 
-[node name="6" type="TextureRect" parent="InventoryContainer"]
+[node name="Focus" type="ReferenceRect" parent="Inventory/InventoryContainer/5"]
+margin_right = 30.0
+margin_bottom = 30.0
+border_color = Color( 0.760784, 0.858824, 0.87451, 1 )
+border_width = 2.0
+editor_only = false
+
+[node name="6" type="TextureRect" parent="Inventory/InventoryContainer"]
 margin_left = 170.0
 margin_right = 200.0
 margin_bottom = 30.0
@@ -104,13 +151,20 @@ rect_min_size = Vector2( 30, 30 )
 texture = ExtResource( 3 )
 expand = true
 
-[node name="Label" type="Label" parent="InventoryContainer/6"]
+[node name="Label" type="Label" parent="Inventory/InventoryContainer/6"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 text = "0
 "
 
-[node name="7" type="TextureRect" parent="InventoryContainer"]
+[node name="Focus" type="ReferenceRect" parent="Inventory/InventoryContainer/6"]
+margin_right = 30.0
+margin_bottom = 30.0
+border_color = Color( 0.760784, 0.858824, 0.87451, 1 )
+border_width = 2.0
+editor_only = false
+
+[node name="7" type="TextureRect" parent="Inventory/InventoryContainer"]
 margin_left = 204.0
 margin_right = 234.0
 margin_bottom = 30.0
@@ -118,13 +172,20 @@ rect_min_size = Vector2( 30, 30 )
 texture = ExtResource( 3 )
 expand = true
 
-[node name="Label" type="Label" parent="InventoryContainer/7"]
+[node name="Label" type="Label" parent="Inventory/InventoryContainer/7"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 text = "0
 "
 
-[node name="8" type="TextureRect" parent="InventoryContainer"]
+[node name="Focus" type="ReferenceRect" parent="Inventory/InventoryContainer/7"]
+margin_right = 30.0
+margin_bottom = 30.0
+border_color = Color( 0.760784, 0.858824, 0.87451, 1 )
+border_width = 2.0
+editor_only = false
+
+[node name="8" type="TextureRect" parent="Inventory/InventoryContainer"]
 margin_left = 238.0
 margin_right = 268.0
 margin_bottom = 30.0
@@ -132,13 +193,20 @@ rect_min_size = Vector2( 30, 30 )
 texture = ExtResource( 3 )
 expand = true
 
-[node name="Label" type="Label" parent="InventoryContainer/8"]
+[node name="Label" type="Label" parent="Inventory/InventoryContainer/8"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 text = "0
 "
 
-[node name="9" type="TextureRect" parent="InventoryContainer"]
+[node name="Focus" type="ReferenceRect" parent="Inventory/InventoryContainer/8"]
+margin_right = 30.0
+margin_bottom = 30.0
+border_color = Color( 0.760784, 0.858824, 0.87451, 1 )
+border_width = 2.0
+editor_only = false
+
+[node name="9" type="TextureRect" parent="Inventory/InventoryContainer"]
 margin_left = 272.0
 margin_right = 302.0
 margin_bottom = 30.0
@@ -146,13 +214,20 @@ rect_min_size = Vector2( 30, 30 )
 texture = ExtResource( 3 )
 expand = true
 
-[node name="Label" type="Label" parent="InventoryContainer/9"]
+[node name="Label" type="Label" parent="Inventory/InventoryContainer/9"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 text = "0
 "
 
-[node name="10" type="TextureRect" parent="InventoryContainer"]
+[node name="Focus" type="ReferenceRect" parent="Inventory/InventoryContainer/9"]
+margin_right = 30.0
+margin_bottom = 30.0
+border_color = Color( 0.760784, 0.858824, 0.87451, 1 )
+border_width = 2.0
+editor_only = false
+
+[node name="10" type="TextureRect" parent="Inventory/InventoryContainer"]
 margin_left = 306.0
 margin_right = 336.0
 margin_bottom = 30.0
@@ -160,11 +235,18 @@ rect_min_size = Vector2( 30, 30 )
 texture = ExtResource( 3 )
 expand = true
 
-[node name="Label" type="Label" parent="InventoryContainer/10"]
+[node name="Label" type="Label" parent="Inventory/InventoryContainer/10"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 text = "0
 "
+
+[node name="Focus" type="ReferenceRect" parent="Inventory/InventoryContainer/10"]
+margin_right = 30.0
+margin_bottom = 30.0
+border_color = Color( 0.760784, 0.858824, 0.87451, 1 )
+border_width = 2.0
+editor_only = false
 
 [node name="Cursor" type="TextureRect" parent="."]
 anchor_left = 0.5

@@ -1,6 +1,6 @@
 extends Control
 
-onready var inventory_ui = $InventoryContainer
+onready var inventory_ui = $Inventory/InventoryContainer
 var empty_slot_tex = preload("res://assets/model/texture/empty_slot.tres")
 
 func _ready():
@@ -10,6 +10,11 @@ func _on_inventory_changed(inv):
 	var idx = 0
 	for i in inv.item_list:
 		var slot = inventory_ui.get_child(idx)
+		
+		if idx == inv.equipped_pointer:
+			slot.get_node("Focus").visible = true
+		else:
+			slot.get_node("Focus").visible = false
 		
 		if i["item_res"]:
 			var icon = i["item_icon"]

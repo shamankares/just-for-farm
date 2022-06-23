@@ -1,0 +1,241 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/misc/SettingsUI.gd" type="Script" id=1]
+[ext_resource path="res://assets/font/Barlow-Regular.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+outline_size = 1
+outline_color = Color( 0.556863, 0.556863, 0.556863, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+outline_size = 1
+outline_color = Color( 0.556863, 0.556863, 0.556863, 1 )
+font_data = ExtResource( 2 )
+
+[node name="SettingsUI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -273.0
+margin_top = -252.0
+margin_right = 273.0
+margin_bottom = 215.0
+color = Color( 0.14902, 0.14902, 0.211765, 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -216.0
+margin_top = -198.5
+margin_right = 216.0
+margin_bottom = 175.5
+custom_constants/separation = 10
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="PlayerMoveSpeed" type="ColorRect" parent="ColorRect/VBoxContainer"]
+margin_right = 432.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 0, 80 )
+color = Color( 0.14902, 0.14902, 0.211765, 1 )
+
+[node name="Label" type="Label" parent="ColorRect/VBoxContainer/PlayerMoveSpeed"]
+margin_right = 122.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 1 )
+text = "Player move speed"
+
+[node name="Label2" type="Label" parent="ColorRect/VBoxContainer/PlayerMoveSpeed"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -7.0
+margin_right = 39.0
+margin_bottom = 7.0
+custom_fonts/font = SubResource( 1 )
+text = "Low"
+
+[node name="Label3" type="Label" parent="ColorRect/VBoxContainer/PlayerMoveSpeed"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -39.0
+margin_top = -7.0
+margin_bottom = 7.0
+custom_fonts/font = SubResource( 1 )
+text = "High"
+
+[node name="HSlider" type="HSlider" parent="ColorRect/VBoxContainer/PlayerMoveSpeed"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -106.5
+margin_top = -8.0
+margin_right = 106.5
+margin_bottom = 8.0
+min_value = 3.0
+max_value = 8.0
+value = 5.0
+
+[node name="MouseSensivity" type="ColorRect" parent="ColorRect/VBoxContainer"]
+margin_top = 90.0
+margin_right = 432.0
+margin_bottom = 170.0
+rect_min_size = Vector2( 0, 80 )
+color = Color( 0.14902, 0.14902, 0.211765, 1 )
+
+[node name="Label4" type="Label" parent="ColorRect/VBoxContainer/MouseSensivity"]
+margin_right = 122.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 1 )
+text = "Mouse sensivity"
+
+[node name="Label5" type="Label" parent="ColorRect/VBoxContainer/MouseSensivity"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -7.0
+margin_right = 39.0
+margin_bottom = 7.0
+custom_fonts/font = SubResource( 1 )
+text = "Low"
+
+[node name="Label6" type="Label" parent="ColorRect/VBoxContainer/MouseSensivity"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -39.0
+margin_top = -7.0
+margin_bottom = 7.0
+custom_fonts/font = SubResource( 1 )
+text = "High"
+
+[node name="HSlider2" type="HSlider" parent="ColorRect/VBoxContainer/MouseSensivity"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -104.5
+margin_top = -8.0
+margin_right = 104.5
+margin_bottom = 8.0
+min_value = 1.0
+value = 30.0
+
+[node name="BGLevel" type="ColorRect" parent="ColorRect/VBoxContainer"]
+margin_top = 180.0
+margin_right = 432.0
+margin_bottom = 260.0
+rect_min_size = Vector2( 0, 80 )
+color = Color( 0.14902, 0.14902, 0.211765, 1 )
+
+[node name="Label4" type="Label" parent="ColorRect/VBoxContainer/BGLevel"]
+margin_right = 122.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 1 )
+text = "Background music volume"
+
+[node name="Label5" type="Label" parent="ColorRect/VBoxContainer/BGLevel"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -7.0
+margin_right = 39.0
+margin_bottom = 7.0
+custom_fonts/font = SubResource( 1 )
+text = "Low"
+
+[node name="Label6" type="Label" parent="ColorRect/VBoxContainer/BGLevel"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -39.0
+margin_top = -7.0
+margin_bottom = 7.0
+custom_fonts/font = SubResource( 1 )
+text = "High"
+
+[node name="HSlider2" type="HSlider" parent="ColorRect/VBoxContainer/BGLevel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -104.5
+margin_top = -8.0
+margin_right = 104.5
+margin_bottom = 8.0
+min_value = -65.0
+max_value = 4.0
+value = -5.0
+
+[node name="SfxLevel" type="ColorRect" parent="ColorRect/VBoxContainer"]
+margin_top = 270.0
+margin_right = 432.0
+margin_bottom = 350.0
+rect_min_size = Vector2( 0, 80 )
+color = Color( 0.14902, 0.14902, 0.211765, 1 )
+
+[node name="Label4" type="Label" parent="ColorRect/VBoxContainer/SfxLevel"]
+margin_right = 122.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 1 )
+text = "Sound effect volume"
+
+[node name="Label5" type="Label" parent="ColorRect/VBoxContainer/SfxLevel"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -7.0
+margin_right = 39.0
+margin_bottom = 7.0
+custom_fonts/font = SubResource( 1 )
+text = "Low"
+
+[node name="Label6" type="Label" parent="ColorRect/VBoxContainer/SfxLevel"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -39.0
+margin_top = -7.0
+margin_bottom = 7.0
+custom_fonts/font = SubResource( 1 )
+text = "High"
+
+[node name="HSlider2" type="HSlider" parent="ColorRect/VBoxContainer/SfxLevel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -104.5
+margin_top = -8.0
+margin_right = 104.5
+margin_bottom = 8.0
+min_value = -65.0
+max_value = 4.0
+
+[node name="Back" type="Button" parent="ColorRect"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 56.0
+margin_top = -74.0
+margin_right = 153.0
+margin_bottom = -29.0
+custom_fonts/font = SubResource( 2 )
+text = "Back"
+
+[connection signal="value_changed" from="ColorRect/VBoxContainer/PlayerMoveSpeed/HSlider" to="." method="_on_move_speed_changed"]
+[connection signal="value_changed" from="ColorRect/VBoxContainer/MouseSensivity/HSlider2" to="." method="_on_mouse_settings_changed"]
+[connection signal="value_changed" from="ColorRect/VBoxContainer/BGLevel/HSlider2" to="." method="_on_bg_music_value_changed"]
+[connection signal="value_changed" from="ColorRect/VBoxContainer/SfxLevel/HSlider2" to="." method="_on_sfx_level_value_changed"]
+[connection signal="pressed" from="ColorRect/Back" to="." method="_on_Back_pressed"]

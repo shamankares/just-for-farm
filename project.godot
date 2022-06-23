@@ -39,12 +39,13 @@ _global_script_class_icons={
 [application]
 
 config/name="Just For Farm"
-run/main_scene="res://scenes/gameplay/Gameplay.tscn"
+run/main_scene="res://scenes/mainmenu/MainMenu.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
 ItemResLoader="*res://scenes/misc/item_res_loader.gd"
+Settings="*res://scenes/settings/Settings.gd"
 
 [editor_plugins]
 
@@ -86,14 +87,19 @@ left_click={
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
-focus_foward={
+inv_focus_foward={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":88,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
-focus_backward={
+inv_focus_backward={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":90,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+inv_cancel_focus={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":67,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 

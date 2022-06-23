@@ -12,6 +12,7 @@ export (int) var max_stack = 1
 export (int) var sell_price
 export (int) var buy_price
 export (String) var animation
+var has_sfx = get_node_or_null("Sfx")
 var holded := true
 
 func _init():
@@ -19,10 +20,18 @@ func _init():
 
 func _ready():
 	connect("item_sold", get_node("/root/Gameplay"), "add_coin")
+	if has_sfx:
+		$Sfx.set_volume_db(Settings.sfx_level)
+
+func _process(_delta):
+	if has_sfx:
+		$Sfx.set_volume_db(Settings.sfx_level)
 
 func use_item():
-	if $AnimationPlayer:
+	if $AnimationPlayer and $Sfx:
+		$Sfx.play()
 		$AnimationPlayer.play(animation)
+		yield($Sfx, "finished")
 		yield($AnimationPlayer, "animation_finished")
 		$AnimationPlayer.play("RESET")
 

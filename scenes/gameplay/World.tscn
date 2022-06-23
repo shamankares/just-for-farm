@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/lib/TanahLib.tres" type="MeshLibrary" id=1]
 [ext_resource path="res://scenes/gameplay/world.gd" type="Script" id=2]
@@ -11,10 +11,13 @@ albedo_texture = ExtResource( 4 )
 
 [sub_resource type="CubeMesh" id=2]
 material = SubResource( 1 )
-size = Vector3( 6, 1, 2 )
+size = Vector3( 6, 2, 2 )
 
 [sub_resource type="ConvexPolygonShape" id=3]
-points = PoolVector3Array( -3, -0.5, -1, -3, 0.5, -1, 3, -0.5, -1, -3, -0.5, 1, -3, 0.5, 1, 3, 0.5, -1, 3, -0.5, 1, 3, 0.5, 1 )
+points = PoolVector3Array( 3, 1, 1, 3, 1, -1, -3, 1, 1, 3, -1, 1, 3, -1, -1, -3, 1, -1, -3, -1, 1, -3, -1, -1 )
+
+[sub_resource type="ConvexPolygonShape" id=6]
+points = PoolVector3Array( -0.25, -3.5, -26, 0.25, -3.5, -26, -0.25, -3.5, 26, -0.25, 3.5, -26, 0.25, 3.5, -26, 0.25, -3.5, 26, -0.25, 3.5, 26, 0.25, 3.5, 26 )
 
 [node name="World" type="Spatial"]
 script = ExtResource( 2 )
@@ -25,25 +28,10 @@ light_color = Color( 1, 0.980392, 0.713726, 1 )
 light_energy = 1.383
 light_indirect_energy = 1.198
 
-[node name="Bin" type="Area" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.5384, 0.66645, 19.8986 )
-collision_layer = 4
-collision_mask = 10
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="MeshInstance" type="MeshInstance" parent="Bin"]
-mesh = SubResource( 2 )
-material/0 = null
-
-[node name="CollisionShape" type="CollisionShape" parent="Bin"]
-shape = SubResource( 3 )
-
 [node name="Tanah" type="GridMap" parent="."]
 mesh_library = ExtResource( 1 )
 use_in_baked_light = true
-cell_size = Vector3( 1, 1, 1 )
+cell_size = Vector3( 1, 5, 1 )
 cell_center_y = false
 collision_mask = 2
 data = {
@@ -54,3 +42,38 @@ __meta__ = {
 "_editor_clip_": 0,
 "_editor_floor_": Vector3( 0, 0, 0 )
 }
+
+[node name="Bin" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 17.5384, 0.66645, 19.8986 )
+collision_layer = 5
+collision_mask = 15
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="MeshInstance" type="MeshInstance" parent="Bin"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.467582, 0 )
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="Bin"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.467582, 0 )
+shape = SubResource( 3 )
+
+[node name="StaticBody" type="StaticBody" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -26.2209, 3.54003, 0 )
+shape = SubResource( 6 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="StaticBody"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 3.54, 26.3011 )
+shape = SubResource( 6 )
+
+[node name="CollisionShape3" type="CollisionShape" parent="StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26.2269, 3.54003, 0 )
+shape = SubResource( 6 )
+
+[node name="CollisionShape4" type="CollisionShape" parent="StaticBody"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 3.54, -26.2644 )
+shape = SubResource( 6 )

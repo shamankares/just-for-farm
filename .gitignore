@@ -4,3 +4,8 @@
 # Binaries
 bin/
 build/
+
+# Files
+"**/*.*.import"
+"**/**/*.*.import"
+"*.*.import"
