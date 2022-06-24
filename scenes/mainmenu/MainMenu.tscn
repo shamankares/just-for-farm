@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://assets/font/Barlow-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://scenes/mainmenu/MainMenu.gd" type="Script" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/misc/SettingsUI.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/font/Barlow-Bold.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://assets/font/Barlow-Italic.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://assets/model/texture/scenery.png" type="Texture" id=8]
 
 [sub_resource type="DynamicFont" id=2]
 size = 65
@@ -36,6 +37,10 @@ font_data = ExtResource( 7 )
 size = 17
 font_data = ExtResource( 6 )
 
+[sub_resource type="DynamicFont" id=8]
+size = 18
+font_data = ExtResource( 1 )
+
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -44,6 +49,8 @@ script = ExtResource( 2 )
 [node name="Background" type="TextureRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+texture = ExtResource( 8 )
+expand = true
 
 [node name="Main" type="Control" parent="."]
 anchor_right = 1.0
@@ -55,9 +62,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -349.0
-margin_top = -233.0
+margin_top = -220.0
 margin_right = 350.0
-margin_bottom = -135.0
+margin_bottom = -122.0
 custom_fonts/font = SubResource( 2 )
 text = "Just For Farm!"
 align = 1
@@ -157,6 +164,7 @@ text = "WASD: Control the player
 E or Left Click: Use the equipped tool
 Z or X: Switch equipped item
 C: Cancel equipped item
+B: Open store
 ESC: Pause
 Enter or Return: Show player's statistics
 
@@ -215,26 +223,48 @@ custom_fonts/italics_font = SubResource( 7 )
 custom_fonts/bold_font = SubResource( 6 )
 custom_fonts/normal_font = SubResource( 4 )
 bbcode_enabled = true
-bbcode_text = "[b]Models[/b]:
+bbcode_text = "[center][b]Game Programmer[/b]
+Anindya Sekar Paramitha
+
+[b]Asset[/b]
+Kurrata Aini
+Ervan Kurniawan
+Ezy Okto Pradiki
+Novia Safutri
+
+[b]Game Tester[/b]
+Ezy Okto Pradiki
+
+[b]Models[/b]
 Ground model: [i]Free Low Poly Nature Forest by Pure Poly via Unity Asset Store (Modified)[/i]
 Leek: [i]Leek by sharkbitestudios via Sketchfab[/i]
 Corn Plant: [i]Corn Field v1 by printable_models via Free3D (Modified)[/i]
 Watering Can: [i]Watering Can by animatedheaven via Free3D (Modified)[/i]
 
-
-[b]Music and SE[/b]:
+[b]Music and SE[/b]
 Main Menu: [i]comic5 by Hoerspielwerkstatt HEF via pixabay[/i]
 Gameplay: [i]Eilegeiya by SamuelFrancisJohnson via pixabay[/i]
 Hoe: [i]hoe sound effect free - Efek suara cangkul by via Youtube (Modified)[/i]
-Watering Can: [i]Watering Plants by Angellu16 via pixabay (Modified)[/i]"
-text = "Models:
+Watering Can: [i]Watering Plants by Angellu16 via pixabay (Modified)[/i][/center]"
+text = "Game Programmer
+Anindya Sekar Paramitha
+
+Asset
+Kurrata Aini
+Ervan Kurniawan
+Ezy Okto Pradiki
+Novia Safutri
+
+Game Tester
+Ezy Okto Pradiki
+
+Models
 Ground model: Free Low Poly Nature Forest by Pure Poly via Unity Asset Store (Modified)
 Leek: Leek by sharkbitestudios via Sketchfab
 Corn Plant: Corn Field v1 by printable_models via Free3D (Modified)
 Watering Can: Watering Can by animatedheaven via Free3D (Modified)
 
-
-Music and SE:
+Music and SE
 Main Menu: comic5 by Hoerspielwerkstatt HEF via pixabay
 Gameplay: Eilegeiya by SamuelFrancisJohnson via pixabay
 Hoe: hoe sound effect free - Efek suara cangkul by via Youtube (Modified)
@@ -249,6 +279,19 @@ margin_right = 184.0
 margin_bottom = -34.5
 custom_fonts/font = SubResource( 5 )
 text = "Back"
+
+[node name="Version" type="Label" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -107.0
+margin_top = -22.0
+margin_right = -10.0
+custom_fonts/font = SubResource( 8 )
+text = "v1.0.0"
+align = 2
+valign = 1
 
 [node name="BGMusicMenu" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )

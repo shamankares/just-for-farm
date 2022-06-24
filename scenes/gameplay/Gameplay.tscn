@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/gameplay/World.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/gameplay/Player.tscn" type="PackedScene" id=2]
@@ -8,6 +8,18 @@
 [ext_resource path="res://assets/music/backsound1.wav" type="AudioStream" id=6]
 [ext_resource path="res://scenes/gameplay/Statistic.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/store/Store.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/model/texture/scenery.png" type="Texture" id=9]
+
+[sub_resource type="PanoramaSky" id=1]
+radiance_size = 0
+panorama = ExtResource( 9 )
+
+[sub_resource type="Environment" id=2]
+background_mode = 2
+background_sky = SubResource( 1 )
+background_color = Color( 0.615686, 0.690196, 0.823529, 0.168627 )
+background_energy = 0.46
+ambient_light_color = Color( 0.368627, 0.458824, 0.380392, 0.2 )
 
 [node name="Gameplay" type="Node"]
 script = ExtResource( 4 )
@@ -33,3 +45,6 @@ pause_mode = 2
 stream = ExtResource( 6 )
 volume_db = -5.0
 autoplay = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 2 )
