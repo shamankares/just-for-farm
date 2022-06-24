@@ -1,6 +1,7 @@
 extends Control
 
 signal game_resumed()
+signal game_exited()
 
 onready var settings_menu = $SettingsUI
 
@@ -15,4 +16,5 @@ func _on_Settings_pressed():
 	$PauseContainer.visible = false
 
 func _on_BackToMenu_pressed():
+	emit_signal("game_exited")
 	get_tree().change_scene("res://scenes/mainmenu/MainMenu.tscn")

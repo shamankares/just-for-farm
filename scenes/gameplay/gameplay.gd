@@ -7,10 +7,19 @@ var details_plant_planted = {
 	"Jagung": 0,
 	"Kangkung": 0,
 	"Timun": 0,
-	"Tomat": 0
+	"Tomat": 0,
+	"PouchBawang": 0,
+	"PouchJagung": 0,
+	"PouchKangkung": 0,
+	"PouchTimun": 0,
+	"PouchTomat": 0
 }
 #var unlocked : Array = []
+
+signal show_error(desc)
+
 onready var coin_txt = $Statistic/StatisticContainer/KoinCon/Koin
+onready var coin_store = $StoreUI/StoreContainer/KoinCon/Koin
 onready var statistic_harvest = $Statistic/StatisticContainer/GridContainer
 
 func _init():
@@ -18,42 +27,66 @@ func _init():
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	coin_txt.text = str(coin)
+	coin_store.text = str(coin)
 	$BGMusic.set_volume_db(Settings.bg_music_level)
-
+	
+	self.connect("show_error", $GameplayUI, "_show_msg")
 	$Player.connect("ground_clicked", $World/Tanah, "take_act_grid", [], CONNECT_DEFERRED)
 	$Player/Inventory.connect("inventory_changed", $GameplayUI, "_on_inventory_changed", [], CONNECT_DEFERRED)
+	$Player/Inventory.connect("msg_inv_error", $GameplayUI, "_show_msg")
+	$StoreUI.connect("item_brought", self, "add_item_to_inv")
 	$PauseScreen.connect("game_resumed", self, "_on_game_resumed")
+	$PauseScreen.connect("game_exited", self, "_on_game_exited")
 	
-	coin_txt.text = str(coin)
-	
-	$Player/Inventory.add_existed_item("Cangkul", 1)
-	$Player/Inventory.add_existed_item("Penyiram", 1)
-	$Player/Inventory.add_existed_item("Pouch Bawang", 10)
-	$Player/Inventory.add_existed_item("Pouch Kangkung", 10)
-	$Player/Inventory.add_existed_item("Pouch Tomat", 10)
-	$Player/Inventory.add_existed_item("Pouch Timun", 10)
-	$Player/Inventory.add_existed_item("Pouch Jagung", 10)
+#	$Player/Inventory.add_existed_item("Cangkul", 1)
+#	$Player/Inventory.add_existed_item("Penyiram", 1)
+#	$Player/Inventory.add_existed_item("Pouch Bawang", 10)
+#	$Player/Inventory.add_existed_item("Pouch Kangkung", 10)
+#	$Player/Inventory.add_existed_item("Pouch Tomat", 10)
+#	$Player/Inventory.add_existed_item("Pouch Timun", 10)
+#	$Player/Inventory.add_existed_item("Pouch Jagung", 10)
 
 func _process(_delta):
 	$BGMusic.set_volume_db(Settings.bg_music_level)
 
 func _input(event):
-	if Input.is_action_pressed("ui_cancel"):
+	if Input.is_action_just_pressed("ui_cancel"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		$PauseScreen.visible = true
-	elif Input.is_action_pressed("show_statistcs") and (!$PauseScreen.visible):
+	if Input.is_action_just_pressed("show_statistcs") and (!$PauseScreen.visible) and (!$StoreUI.visible):
 		if $Statistic.visible:
 			$Statistic.visible = false
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			$Statistic.visible = true
+	if Input.is_action_just_pressed("open_store") and (!$PauseScreen.visible) and (!$Statistic.visible):
+		if $StoreUI.visible:
+			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+			$StoreUI.visible = false
+		else:
+			$StoreUI.visible = true
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 #	if Input.is_action_pressed("left_click") and Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
 #		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+func add_item_to_inv(item_name, price):
+	var temp_val = coin - price
+	if temp_val < 0:
+		emit_signal("show_error", "NO_ENOUGH_MONEY")
+	else:
+		coin -= price
+		coin_txt.text = str(coin)
+		coin_store.text = str(coin)
+		item_name = item_name.capitalize()
+		$Player/Inventory.add_existed_item(item_name, 1)
 
 func add_coin(item_name, amount):
 	coin += amount
 	coin_txt.text = str(coin)
+	coin_store.text = str(coin)
+	item_name = item_name.replace(" ", "")
 	details_plant_planted[item_name] += 1
 	var item_sale_txt = statistic_harvest.get_node("%sCon/%s" % [item_name, item_name])
 	item_sale_txt.text = str(details_plant_planted[item_name])
@@ -62,3 +95,21 @@ func _on_game_resumed():
 	$PauseScreen.visible = false
 #	get_tree().set_pause(false)
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+func _on_game_exited():
+	for i in $Player/Inventory.item_list:
+		if is_instance_valid(i["item_res"]):
+			i["item_res"].queue_free()
+	for node in get_children():
+		node.queue_free()
+	queue_free()
+
+func _notification(what):
+	match what:
+		NOTIFICATION_WM_QUIT_REQUEST:
+			for i in $Player/Inventory.item_list:
+				if is_instance_valid(i["item_res"]):
+					i["item_res"].queue_free()
+			for node in get_children():
+				node.queue_free()
+			queue_free()

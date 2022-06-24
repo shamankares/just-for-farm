@@ -1,6 +1,7 @@
 extends Control
 
 onready var inventory_ui = $Inventory/InventoryContainer
+onready var message_label = $Message
 var empty_slot_tex = preload("res://assets/model/texture/empty_slot.tres")
 
 func _ready():
@@ -33,4 +34,15 @@ func _highlight_equipped(_item, idx):
 	pass
 
 func _show_msg(desc):
+	match desc:
+		"INVENTORY_FULL":
+			message_label.text = "The inventory is full."
+		"INVALID_QUANTITY":
+			message_label.text = "The amount of quantity is invalid."
+		"NO_ENOUGH_MONEY":
+			message_label.text = "No enough money."
+		_:
+			message_label.text = "Wait, how did you can print this?"
+	yield(get_tree().create_timer(1.5), "timeout")
+	message_label.text = ""
 	pass

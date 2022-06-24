@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://assets/item/Item.gd" type="Script" id=1]
+[ext_resource path="res://assets/item/item.gd" type="Script" id=1]
 [ext_resource path="res://assets/model/item/kangkung.obj" type="ArrayMesh" id=2]
 [ext_resource path="res://assets/icon/icon_kangkung.png" type="Texture" id=3]
 

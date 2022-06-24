@@ -45,7 +45,7 @@ func add_to_inventory(item, quantity):
 		emit_signal("msg_inv_error", "INVENTORY_FULL")
 		return false
 	else:
-		var added_item = item.instance()
+		var added_item = item.duplicate()
 		item_list[stack_pointer] = {
 			"item_name": added_item.item_name,
 			"item_res" : added_item,
@@ -82,6 +82,7 @@ func add_existed_item(item_name, quantity):
 	#print(item_list[0]["item_res"].item_name)	###debug
 
 func remove_item():
+	item_list[equipped_pointer]["item_res"].queue_free()
 	item_list[equipped_pointer] = {
 		"item_name": null,
 		"item_res" : null,

@@ -1,0 +1,20 @@
+[remap]
+
+importer="wavefront_obj"
+type="Mesh"
+path="res://.import/bedeng_jagung_1.obj-05bd5571690c47e149e76ad9a20e9182.mesh"
+
+[deps]
+
+files=[ "res://.import/bedeng_jagung_1.obj-05bd5571690c47e149e76ad9a20e9182.mesh" ]
+
+source_file="res://assets/model/ground_grid/bedeng_jagung_1.obj"
+dest_files=[ "res://.import/bedeng_jagung_1.obj-05bd5571690c47e149e76ad9a20e9182.mesh", "res://.import/bedeng_jagung_1.obj-05bd5571690c47e149e76ad9a20e9182.mesh" ]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3( 1, 1, 1 )
+offset_mesh=Vector3( 0, 0, 0 )
+octahedral_compression=true
+optimize_mesh_flags=4286

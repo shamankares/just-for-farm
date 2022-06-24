@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/cangkul.wav-a2bcba276bf2324d4566bbe9adebfc72.sample"
+
+[deps]
+
+source_file="res://assets/sfx/cangkul.wav"
+dest_files=[ "res://.import/cangkul.wav-a2bcba276bf2324d4566bbe9adebfc72.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

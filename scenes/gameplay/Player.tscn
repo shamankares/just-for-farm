@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/gameplay/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/gameplay/inventory.gd" type="Script" id=2]
-[ext_resource path="res://scenes/gameplay/raycast_player.gd" type="Script" id=3]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.42
@@ -44,7 +43,6 @@ tracks/0/keys = {
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.200119, 0 )
 collision_mask = 5
 script = ExtResource( 1 )
-move_speed = 8.0
 
 [node name="Pivot" type="Spatial" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.38, 0 )
@@ -60,7 +58,6 @@ collision_mask = 5
 collide_with_areas = true
 debug_shape_custom_color = Color( 1, 1, 1, 1 )
 debug_shape_thickness = 1
-script = ExtResource( 3 )
 
 [node name="ItemPosition" type="Position3D" parent="Pivot/Camera"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.495, -0.528331, -1.06313 )

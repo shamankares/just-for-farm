@@ -4,7 +4,12 @@ var player_move_speed = 5.0
 var mouse_sensivity = 30.0
 var bg_music_level = -5.0
 var sfx_level = 0.0
+var loaded = false
 
 func _ready():
-	pass # Replace with function body.
+	if loaded:
+		OS.alert("The game is still running. Close the game and try again.", "The game is already loaded")
+		get_tree().notification(NOTIFICATION_WM_QUIT_REQUEST)
+	else:
+		loaded = true
 

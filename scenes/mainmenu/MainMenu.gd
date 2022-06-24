@@ -1,5 +1,10 @@
 extends Control
 
+func _notification(what):
+	match what:
+		NOTIFICATION_WM_QUIT_REQUEST:
+			queue_free()
+
 func _ready():
 	$BGMusicMenu.set_volume_db(Settings.bg_music_level)
 	$SettingsUI.previous_ui = $Main
@@ -19,8 +24,9 @@ func _on_Credits_pressed():
 	$Credits.visible = true
 
 func _on_Exit_pressed():
-	get_tree().quit(0)
-				
+	#get_tree().quit(0)
+	get_tree().notification(NOTIFICATION_WM_QUIT_REQUEST)
+
 func _on_HowToPlay_pressed():
 	$Main.visible = false
 	$HowToPlay.visible = true
