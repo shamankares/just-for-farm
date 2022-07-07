@@ -6,11 +6,12 @@ func _notification(what):
 			queue_free()
 
 func _ready():
-	$BGMusicMenu.set_volume_db(Settings.bg_music_level)
+	$BGMusicMenu.set_volume_db(Settings.current_config["bg_music_level"])
+	$BGMusicMenu.play()
 	$SettingsUI.previous_ui = $Main
 
 func _process(_delta):
-	$BGMusicMenu.set_volume_db(Settings.bg_music_level)
+	$BGMusicMenu.set_volume_db(Settings.current_config["bg_music_level"])
 
 func _on_Play_pressed():
 	get_tree().change_scene("res://scenes/gameplay/Gameplay.tscn")
@@ -26,11 +27,11 @@ func _on_Credits_pressed():
 func _on_Exit_pressed():
 	#get_tree().quit(0)
 	get_tree().notification(NOTIFICATION_WM_QUIT_REQUEST)
+	get_tree().call_deferred("quit")
 
 func _on_HowToPlay_pressed():
 	$Main.visible = false
 	$HowToPlay.visible = true
-
 
 func _on_Back_pressed():
 	$Main.visible = true

@@ -6,6 +6,7 @@ bin/
 build/
 
 # Files
-"**/*.*.import"
-"**/**/*.*.import"
-"*.*.import"
+#"**/*.*.import"
+#"**/**/*.*.import"
+#"*.*.import"
+proto/

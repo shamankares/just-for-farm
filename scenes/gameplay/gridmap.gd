@@ -55,6 +55,47 @@ var countdown_tanaman = {
 func _ready():
 	pass # Replace with function body.
 
+func save_data():
+	var empty_soil_loc = []
+	var saved_plant = []
+	
+	for tanaman in get_children():
+		var plant_data = inst2dict(tanaman)
+		plant_data.erase("@subpath")
+		plant_data.erase("@path")
+		saved_plant.append(plant_data)
+	for soil_pos in get_used_cells():
+		if get_cell_item(soil_pos.x, soil_pos.y, soil_pos.z) == daftar_tanaman["tanah"]:
+			empty_soil_loc.append(soil_pos)
+	
+	var saving = {
+		"empty_soil_loc" : empty_soil_loc,
+		"saved_plant" : saved_plant
+	}
+	return saving
+
+func load_data(data):
+	if data is Dictionary:
+		if data["empty_soil_loc"] is Array:
+			for soil in data["empty_soil_loc"]:
+				set_cell_item(soil.x, soil.y, soil.z, daftar_tanaman["tanah"])
+		
+		if data["saved_plant"] is Array:
+			for plant in data["saved_plant"]:
+				var spawn_pos = plant["plant_position"]
+				var spawned = spawn_plant(plant["plant_name"], spawn_pos)
+				spawned.plant_phase = plant["plant_phase"]
+				spawned.is_watered = plant["is_watered"]
+				if spawned.plant_phase == 0:
+					set_cell_item(spawn_pos.x, spawn_pos.y, spawn_pos.z, daftar_tanaman["seed"][int(spawned.is_watered)])
+				elif spawned.plant_phase == 2:
+					set_cell_item(spawn_pos.x, spawn_pos.y, spawn_pos.z, daftar_tanaman[spawned.plant_name][str(spawned.plant_phase)])
+				else:
+					set_cell_item(spawn_pos.x, spawn_pos.y, spawn_pos.z, daftar_tanaman[spawned.plant_name][str(spawned.plant_phase)][int(spawned.is_watered)])
+				if spawned.is_watered:
+					spawned.grow()
+	pass
+
 func get_plant_name(glo_position):
 	var loc_pos = world_to_map(glo_position)
 	for tanaman in get_children():
@@ -137,6 +178,7 @@ func spawn_plant(plant, loc):
 #	})
 	add_child(new_plant, true)
 	new_plant.connect("plant_grew", self, "update_plant", [], CONNECT_DEFERRED)
+	return new_plant
 
 #func grow_plant(plant_id):
 #	plant_id.grow()

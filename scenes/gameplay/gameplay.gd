@@ -1,7 +1,7 @@
 extends Node
 
 var coin : int = 100
-var plant_planted : int = 0
+#var plant_planted : int = 0
 var details_plant_planted = {
 	"Bawang": 0,
 	"Jagung": 0,
@@ -29,7 +29,7 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	coin_txt.text = str(coin)
 	coin_store.text = str(coin)
-	$BGMusic.set_volume_db(Settings.bg_music_level)
+	$BGMusic.set_volume_db(Settings.current_config["bg_music_level"])
 	
 	self.connect("show_error", $GameplayUI, "_show_msg")
 	$Player.connect("ground_clicked", $World/Tanah, "take_act_grid", [], CONNECT_DEFERRED)
@@ -39,16 +39,14 @@ func _ready():
 	$PauseScreen.connect("game_resumed", self, "_on_game_resumed")
 	$PauseScreen.connect("game_exited", self, "_on_game_exited")
 	
-#	$Player/Inventory.add_existed_item("Cangkul", 1)
-#	$Player/Inventory.add_existed_item("Penyiram", 1)
-#	$Player/Inventory.add_existed_item("Pouch Bawang", 10)
-#	$Player/Inventory.add_existed_item("Pouch Kangkung", 10)
-#	$Player/Inventory.add_existed_item("Pouch Tomat", 10)
-#	$Player/Inventory.add_existed_item("Pouch Timun", 10)
-#	$Player/Inventory.add_existed_item("Pouch Jagung", 10)
+	var loader = SaveHandler.new()
+	add_child(loader)
+	loader.load_data()
+	yield(loader, "finished")
+	loader.queue_free()
 
 func _process(_delta):
-	$BGMusic.set_volume_db(Settings.bg_music_level)
+	$BGMusic.set_volume_db(Settings.current_config["bg_music_level"])
 
 func _input(event):
 	if Input.is_action_just_pressed("ui_cancel"):
@@ -71,16 +69,35 @@ func _input(event):
 #	if Input.is_action_pressed("left_click") and Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
 #		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
+func save_data():
+	var saved_stat = {
+		"coin" : coin,
+		"plant_selled" : details_plant_planted.duplicate(true)
+	}
+	return saved_stat
+
+func load_data(data):
+	if data is Dictionary:
+		coin = data["coin"]
+		details_plant_planted = data["plant_selled"].duplicate(true)
+		
+		coin_txt.text = str(coin)
+		coin_store.text = str(coin)
+		for item in details_plant_planted:
+			var item_sale_txt = statistic_harvest.get_node("%sCon/%s" % [item, item])
+			item_sale_txt.text = str(details_plant_planted[item])
+		
+
 func add_item_to_inv(item_name, price):
 	var temp_val = coin - price
 	if temp_val < 0:
 		emit_signal("show_error", "NO_ENOUGH_MONEY")
 	else:
-		coin -= price
-		coin_txt.text = str(coin)
-		coin_store.text = str(coin)
 		item_name = item_name.capitalize()
-		$Player/Inventory.add_existed_item(item_name, 1)
+		if $Player/Inventory.add_existed_item(item_name, 1):
+			coin -= price
+			coin_txt.text = str(coin)
+			coin_store.text = str(coin)
 
 func add_coin(item_name, amount):
 	coin += amount
@@ -97,6 +114,11 @@ func _on_game_resumed():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _on_game_exited():
+	var save_obj = SaveHandler.new()
+	call_deferred("add_child", save_obj)
+	save_obj.call_deferred("save_data")
+	yield(save_obj, "finished")
+	
 	for i in $Player/Inventory.item_list:
 		if is_instance_valid(i["item_res"]):
 			i["item_res"].queue_free()
@@ -107,9 +129,5 @@ func _on_game_exited():
 func _notification(what):
 	match what:
 		NOTIFICATION_WM_QUIT_REQUEST:
-			for i in $Player/Inventory.item_list:
-				if is_instance_valid(i["item_res"]):
-					i["item_res"].queue_free()
-			for node in get_children():
-				node.queue_free()
-			queue_free()
+			_on_game_exited()
+			get_tree().call_deferred("quit")

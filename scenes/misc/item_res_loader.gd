@@ -9,7 +9,6 @@ func _notification(what):
 			for item in item_list:
 				item.free()
 			call_deferred("free")
-			pass
 
 func _ready():
 	#
@@ -24,14 +23,14 @@ func _ready():
 		while item_file:
 			if (not item_dir.current_is_dir()) and item_file.get_extension() != "remap":
 				if not item_file in exception:
-					print(item_file)
+#					print(item_file)
 					var instance_file = load(dir_path + item_file)
 					var instance = instance_file.instance()
 					item_list.append(instance)
 			item_file = item_dir.get_next()
 		item_dir.list_dir_end()
 		
-		print(item_list)
+#		print(item_list)
 	else:
 		print("Error while opening the directory.")
 

@@ -23,8 +23,23 @@ func _init():
 #	emit_signal("inventory_changed", self)
 
 func _ready():
-	print("inventory.gd: ", item_list)	###debug
-	print(item_list.size())	###debug
+#	print("inventory.gd: ", item_list)	###debug
+#	print(item_list.size())	###debug
+	pass
+
+func save_data():
+	var saved_inv = item_list.duplicate(true)
+	for item in saved_inv:
+		item.erase("item_res")
+		item.erase("item_icon")
+	return saved_inv
+
+func load_data(data):
+	if data is Array:
+		for item in data:
+			if item["item_name"] != null:
+				add_existed_item(item["item_name"], item["stack"])
+		emit_signal("inventory_changed", self)
 
 func check_free_slot():
 	for item in item_list:

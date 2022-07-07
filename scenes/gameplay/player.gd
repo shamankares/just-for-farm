@@ -2,12 +2,12 @@ extends KinematicBody
 
 signal ground_clicked(item_name, glo_pos)
 
-var move_speed : float = Settings.player_move_speed
+var move_speed : float = Settings.current_config["player_move_speed"]
 var gravity : float = 12
 
 var min_look_angle : float = -85.0
 var max_look_angle : float = 85.0
-var look_sensivity : float = Settings.mouse_sensivity / 100
+var look_sensivity : float = Settings.current_config["mouse_sensivity"] / 100
 
 var mouse_delta : Vector2 = Vector2()
 var velocity : Vector3 = Vector3()
@@ -21,6 +21,7 @@ onready var animation = $AnimationPlayer
 onready var item_pivot = $Pivot/Camera/ItemPosition
 
 func _ready():
+	#load_data()
 	ray.add_exception(self)
 	inventory.connect("item_equipped", self, "_on_equipped_item")
 
@@ -29,7 +30,6 @@ func _input(event):
 		mouse_delta = event.relative
 	if event is InputEventMouseButton and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		if Input.is_action_pressed("left_click"):
-			print("clicked")
 			var obj_col = ray.get_collider()
 			var col_point = ray.get_collision_point()
 			if is_instance_valid(equipped_item):
@@ -93,8 +93,22 @@ func _physics_process(delta):
 		velocity.y -= gravity * delta
 		velocity = move_and_slide(velocity, Vector3.UP)
 	
-	move_speed = Settings.player_move_speed
-	look_sensivity = Settings.mouse_sensivity / 100
+	move_speed = Settings.current_config["player_move_speed"]
+	look_sensivity = Settings.current_config["mouse_sensivity"] / 100
+
+func save_data():
+	var char_trans = {
+		"position" : get_translation(),
+		"rotate" : get_rotation(),
+		"camera_rotate" : camera.get_rotation()
+	}
+	return char_trans
+
+func load_data(data):
+	if data is Dictionary:
+		set_translation(data["position"])
+		set_rotation(data["rotate"])
+		camera.set_rotation(data["camera_rotate"])
 
 func use_item(obj, obj_col_point):
 	var item_name = equipped_item.item_name

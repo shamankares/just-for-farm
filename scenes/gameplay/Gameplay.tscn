@@ -21,7 +21,7 @@ background_color = Color( 0.615686, 0.690196, 0.823529, 0.168627 )
 background_energy = 0.46
 ambient_light_color = Color( 0.368627, 0.458824, 0.380392, 0.2 )
 
-[node name="Gameplay" type="Node"]
+[node name="Gameplay" type="Node" groups=["saveable"]]
 script = ExtResource( 4 )
 
 [node name="World" parent="." instance=ExtResource( 1 )]

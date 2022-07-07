@@ -21,11 +21,11 @@ func _init():
 func _ready():
 	connect("item_sold", get_node("/root/Gameplay"), "add_coin")
 	if has_sfx:
-		$Sfx.set_volume_db(Settings.sfx_level)
+		$Sfx.set_volume_db(Settings.current_config["sfx_level"])
 
 func _process(_delta):
 	if has_sfx:
-		$Sfx.set_volume_db(Settings.sfx_level)
+		$Sfx.set_volume_db(Settings.current_config["sfx_level"])
 
 func use_item():
 	if $AnimationPlayer and $Sfx:

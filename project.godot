@@ -28,12 +28,18 @@ _global_script_classes=[ {
 "class": "SaveData",
 "language": "GDScript",
 "path": "res://scenes/misc/save.gd"
+}, {
+"base": "Node",
+"class": "SaveHandler",
+"language": "GDScript",
+"path": "res://scenes/misc/save_load_handler.gd"
 } ]
 _global_script_class_icons={
 "GitAPI": "",
 "Inventory": "",
 "ItemResource": "",
-"SaveData": ""
+"SaveData": "",
+"SaveHandler": ""
 }
 
 [application]

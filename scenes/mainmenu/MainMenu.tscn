@@ -166,9 +166,7 @@ Z or X: Switch equipped item
 C: Cancel equipped item
 B: Open store
 ESC: Pause
-Enter or Return: Show player's statistics
-
-WARNING: The game progress will not be saved when return to main menu."
+Enter or Return: Show player's statistics"
 
 [node name="Back" type="Button" parent="HowToPlay/ColorRect"]
 anchor_top = 1.0
@@ -289,13 +287,12 @@ margin_left = -107.0
 margin_top = -22.0
 margin_right = -10.0
 custom_fonts/font = SubResource( 8 )
-text = "v1.0.0"
+text = "v1.1.0"
 align = 2
 valign = 1
 
 [node name="BGMusicMenu" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
-autoplay = true
 
 [connection signal="pressed" from="Main/VBoxContainer/Play" to="." method="_on_Play_pressed"]
 [connection signal="pressed" from="Main/VBoxContainer/HowToPlay" to="." method="_on_HowToPlay_pressed"]
