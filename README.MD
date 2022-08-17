@@ -17,6 +17,6 @@ Just For Farm is a farming simulation game. This game is created for Computer Gr
 * E or Left Click: Use the equipped tool
 * Z or X: Switch equipped item
 * C: Cancel equipped item
-* B: Open or store window
+* B: Open or close store window
 * ESC: Pause
 * Enter or Return: Show player's statistics
